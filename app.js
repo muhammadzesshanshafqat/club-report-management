@@ -96,7 +96,9 @@ app.post('/user/report/edit', function(req, res){
 	console.log('request placed for: ' + req.url);
 	console.log('Got A post request on /edit-report.');
 	console.log('Displays the report page');
+	console.log('This is to test git repository');
 });
 
 
 http.createServer(app).listen(3000);
+
