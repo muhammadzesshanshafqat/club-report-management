@@ -14,7 +14,7 @@ var connection = mysql.createConnection({
   user     : 'root',
   password : '000',
   database : 'crud',
-  port	   : '3306'
+  port	   : '3310'
 });
 
 //
@@ -22,6 +22,8 @@ var app = express();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+ 
+app.use(bodyParser.urlencoded({extended:false}))
 
 connection.connect(function(err) {
 	if(err) {
@@ -47,6 +49,8 @@ app.post('/login', function(req, res){
 	console.log('request placed for: ' + req.url);
 	console.log('Got A post request on /login.');
 	console.log('Displays all-reports after login');
+	console.log('params'+ req.body.username + " " + req.body.password);
+	res.redirect('/user/all-reports')
 });
 
 app.get('/signup', function(req, res){
@@ -57,6 +61,7 @@ app.get('/signup', function(req, res){
 app.post('/signup', function(req, res){
 	console.log('request placed for: ' + req.url);
 	console.log('Got A post request on /signup.');
+	console.log("params " + req.body.firstname + " " + req.body.familyname + " " + req.body.username + " " + req.body.password +" "+ req.body.confirmpassword)
 	res.render('login');
 });
 
@@ -84,7 +89,9 @@ app.get('/user/create-report', function(req, res){
 app.post('/user/create-report', function(req, res){
 	console.log('request placed for: ' + req.url);
 	console.log('Got A post request on /create-report.');
-	console.log('Displays the all-reports');
+	console.log("pasrm" + req.body.newreport);
+	res.redirect('/user/report');
+
 });
 
 app.get('/user/report/edit', function(req, res){
